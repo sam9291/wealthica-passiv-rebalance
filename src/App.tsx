@@ -138,10 +138,12 @@ const App = () => {
   const select = async (portfolio: PortfolioTarget) => {
     const result = await fetchRebalanceActions({
       buy_only: generateBuyOnly,
-      positions: positions.map((x) => ({
-        symbol: x.security.symbol,
-        units: x.quantity,
-      })),
+      positions: positions
+        .map((x) => ({
+          symbol: x.security.symbol,
+          units: x.quantity,
+        }))
+        .slice(0, 25),
       targets: portfolio.components.map((x) => ({
         percent: x.percentOfPortfolio,
         symbol: x.symbol,
