@@ -68,7 +68,7 @@ const App = () => {
         const result = await fetchPositions(options);
         setPositions(result);
 
-        const targetResults = await fetchTargets(options);
+        const targetResults = await fetchTargets();
         setTargetRepository(targetResults);
       }
     };

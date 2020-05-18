@@ -6,6 +6,11 @@ export type WealthicaAddon = {
     event: string,
     options: (options: WealthicaAddonOptions) => void
   ) => void;
+  request: (query: {
+    method: string;
+    endpoint: string;
+    query?: any;
+  }) => Promise<any>;
   api: {
     getPositions: (query: {
       groups?: string;
