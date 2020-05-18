@@ -95,7 +95,7 @@ const App = () => {
         const targetResults = await fetchTargets();
         setTargetRepository(targetResults);
 
-        const institutionsResults = await fetchInstitutions();
+        const institutionsResults = await fetchInstitutions(options);
         setInstitutions(institutionsResults);
       }
     };

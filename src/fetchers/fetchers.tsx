@@ -27,8 +27,14 @@ const fetchPositions = (options: WealthicaAddonOptions): Promise<Position[]> =>
     investments: options.investmentsFilter,
   });
 
-const fetchInstitutions = (): Promise<Institution[]> =>
-  wealthica.addon.api.getInstitution();
+const fetchInstitutions = (
+  options: WealthicaAddonOptions
+): Promise<Institution[]> =>
+  wealthica.addon.api.getInstitution({
+    groups: options.groupsFilter,
+    institutions: options.institutionsFilter,
+    investments: options.investmentsFilter,
+  });
 
 const fetchTargets = (): Promise<PortfolioTargetRepository> =>
   wealthica.addon
