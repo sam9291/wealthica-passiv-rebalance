@@ -17,7 +17,7 @@ export type WealthicaAddon = {
       institutions?: string;
       investments?: string;
     }) => Promise<Position[]>;
-    getInstitution: (query: {
+    getInstitutions: (query: {
       groups?: string;
       institutions?: string;
       investments?: string;

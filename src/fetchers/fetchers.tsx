@@ -30,7 +30,7 @@ const fetchPositions = (options: WealthicaAddonOptions): Promise<Position[]> =>
 const fetchInstitutions = (
   options: WealthicaAddonOptions
 ): Promise<Institution[]> =>
-  wealthica.addon.api.getInstitution({
+  wealthica.addon.api.getInstitutions({
     groups: options.groupsFilter,
     institutions: options.institutionsFilter,
     investments: options.investmentsFilter,
