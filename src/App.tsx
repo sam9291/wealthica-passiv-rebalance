@@ -17,6 +17,7 @@ import {
   PortfolioTarget,
   SymbolTarget,
   RebalanceAction,
+  Balance,
 } from "./environment/passiv-api";
 
 const buttonStyle = { margin: 8 };
@@ -64,7 +65,10 @@ const App = () => {
   const [selectedPortfolio, setSelectedPortfolio] = useState<PortfolioTarget>();
   const [positions, setPositions] = useState<Position[]>([]);
   const [institutions, setInstitutions] = useState<Institution[]>([]);
-  const [rebalanceAction, setRebalanceAction] = useState<RebalanceAction[]>([]);
+  const [rebalanceActions, setRebalanceActions] = useState<RebalanceAction[]>(
+    []
+  );
+  const [cashBalances, setCashBalances] = useState<Balance[]>([]);
 
   useEffect(() => {
     if (!isInitialized) {
@@ -89,6 +93,15 @@ const App = () => {
   useEffect(() => {
     const refreshPositions = async () => {
       if (options) {
+        const getBalancePerCurrency = (currency: string) => ({
+          currency: currency,
+          amount: institutions
+            .flatMap((x) =>
+              x.investments.filter((i) => i.currency === currency)
+            )
+            .reduce((total, investment) => total + investment.cash, 0),
+        });
+
         const result = await fetchPositions(options);
         setPositions(result);
 
@@ -97,33 +110,32 @@ const App = () => {
 
         const institutionsResults = await fetchInstitutions(options);
         setInstitutions(institutionsResults);
+
+        const distinctCurrencies = Object.keys(
+          institutions
+            .flatMap((x) => x.investments)
+            .map((x) => x.currency)
+            .reduce(
+              (map, currency) => ({
+                ...map,
+                [currency]: 1,
+              }),
+              {}
+            )
+        );
+
+        const cashBalances = distinctCurrencies.map((currency) =>
+          getBalancePerCurrency(currency)
+        );
+
+        setCashBalances(cashBalances);
       }
     };
 
     refreshPositions();
-  }, [options]);
+  }, [institutions, options]);
 
   const select = async (portfolio: PortfolioTarget) => {
-    const distinctCurrencies = Object.keys(
-      institutions
-        .flatMap((x) => x.investments)
-        .map((x) => x.currency)
-        .reduce(
-          (map, currency) => ({
-            ...map,
-            [currency]: 1,
-          }),
-          {}
-        )
-    );
-
-    const getBalancePerCurrency = (currency: string) => ({
-      currency: currency,
-      amount: institutions
-        .flatMap((x) => x.investments.filter((i) => i.currency === currency))
-        .reduce((total, investment) => total + investment.cash, 0),
-    });
-
     const result = await fetchRebalanceActions({
       buy_only: generateBuyOnly,
       positions: positions.map((x) => ({
@@ -134,22 +146,40 @@ const App = () => {
         percent: x.percentOfPortfolio,
         symbol: x.symbol,
       })),
-      balances: distinctCurrencies.map((currency) =>
-        getBalancePerCurrency(currency)
-      ),
+      balances: cashBalances,
     });
-    setRebalanceAction(result);
+    setRebalanceActions(result);
     setSelectedPortfolio(portfolio);
   };
 
   return (
     <div className="App">
       <h1>Positions:</h1>
-      <ul>
+      <table>
+        <tr>
+          <th>Symbol</th>
+          <th>Quantity</th>
+        </tr>
         {positions.map((position) => (
-          <li>{`${position.security.symbol}: ${position.quantity}`}</li>
+          <tr>
+            <td>{position.security.symbol}</td>
+            <td>{position.quantity}</td>
+          </tr>
         ))}
-      </ul>
+      </table>
+      <h1>Cash Balance</h1>
+      <table>
+        <tr>
+          <th>Currency</th>
+          <th>Balance</th>
+        </tr>
+        {cashBalances.map((x) => (
+          <tr>
+            <td>{x.currency}</td>
+            <td>{x.amount}</td>
+          </tr>
+        ))}
+      </table>
       <h1>Targets:</h1>
       <div>
         {targetRepository && (
@@ -185,7 +215,7 @@ const App = () => {
               <Row
                 component={c}
                 positions={positions}
-                actions={rebalanceAction}
+                actions={rebalanceActions}
               />
             ))}
           </table>

@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d7bda25e223f01f82f0767398f52e042",
+    "revision": "231f2343ea51758a7c0e0ba1d469d5db",
     "url": "/wealthica-passiv-rebalance/build/index.html"
   },
   {
-    "revision": "d335f98389fe8b37f392",
+    "revision": "ba74b3e37b387afcd3da",
     "url": "/wealthica-passiv-rebalance/build/static/css/main.96b3a414.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wealthica-passiv-rebalance/build/static/js/2.f3659ce9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d335f98389fe8b37f392",
-    "url": "/wealthica-passiv-rebalance/build/static/js/main.4206ce12.chunk.js"
+    "revision": "ba74b3e37b387afcd3da",
+    "url": "/wealthica-passiv-rebalance/build/static/js/main.aff2fc0c.chunk.js"
   },
   {
     "revision": "f42002e80a9b09c71898",
