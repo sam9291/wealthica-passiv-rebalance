@@ -15,3 +15,24 @@ export type PortfolioTarget = {
 export type PortfolioTargetRepository = {
   portfolios: PortfolioTarget[];
 };
+
+export type FetchRebalanceActionsQuery = {
+  positions: PositionQuery[];
+  balances: Balance[];
+  targets: TargetQuery[];
+  buy_only: boolean;
+};
+
+export type Balance = { currency: string; amount: number };
+export type PositionQuery = { symbol: string; units: number };
+export type TargetQuery = {
+  symbol: string;
+  percent: number;
+};
+
+export type RebalanceAction = {
+  symbol: string;
+  action: string | null;
+  price: number;
+  units: number;
+};
