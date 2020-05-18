@@ -20,6 +20,6 @@ const fetchTargets = (): Promise<PortfolioTargetRepository> =>
       method: "GET",
       endpoint: "preferences/addons/passiv/passiv-lite",
     })
-    .then((res) => parsePayload(res));
+    .then((res) => parsePayload(res.data));
 
 export { fetchPositions, fetchTargets };
