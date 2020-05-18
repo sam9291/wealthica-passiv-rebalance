@@ -29,8 +29,11 @@ type RowProps = {
 
 const Row: React.FC<RowProps> = (props) => {
   const quantity =
-    props.positions.find((x) => x.security.symbol === props.component.symbol)
-      ?.quantity || 0;
+    props.positions.find((x) =>
+      [`${x.security.symbol}.TO`, x.security.symbol].includes(
+        props.component.symbol
+      )
+    )?.quantity || 0;
   const rebalanceAction = props.actions.find(
     (x) => x.symbol === props.component.symbol
   );
@@ -57,6 +60,7 @@ const Row: React.FC<RowProps> = (props) => {
 const App = () => {
   const [isInitialized, setIsInitialized] = useState(false);
   const [generateBuyOnly, setGenerateBuyOnly] = useState(false);
+  const [isFetchingData, setIsFetchingData] = useState(false);
   const [options, setOptions] = useState<WealthicaAddonOptions>();
   const [targetRepository, setTargetRepository] = useState<
     PortfolioTargetRepository
@@ -129,6 +133,7 @@ const App = () => {
   }, [options]);
 
   const select = async (portfolio: PortfolioTarget) => {
+    setIsFetchingData(true);
     const result = await fetchRebalanceActions({
       buy_only: generateBuyOnly,
       positions: positions.map((x) => ({
@@ -143,6 +148,7 @@ const App = () => {
     });
     setRebalanceActions(result);
     setSelectedPortfolio(portfolio);
+    setIsFetchingData(false);
   };
 
   return (
@@ -191,6 +197,8 @@ const App = () => {
           </>
         )}
       </div>
+
+      {isFetchingData && <h2>Loading...</h2>}
 
       {selectedPortfolio && positions && (
         <>
