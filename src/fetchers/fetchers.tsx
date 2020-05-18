@@ -5,6 +5,8 @@ import {
 } from "../environment/wealthica-api";
 import { PortfolioTargetRepository } from "../environment/passiv-api";
 
+const parsePayload = (token: string) => JSON.parse(atob(token));
+
 const fetchPositions = (options: WealthicaAddonOptions): Promise<Position[]> =>
   wealthica.addon.api.getPositions({
     groups: options.groupsFilter,
@@ -18,9 +20,6 @@ const fetchTargets = (): Promise<PortfolioTargetRepository> =>
       method: "GET",
       endpoint: "preferences/addons/passiv/passiv-lite",
     })
-    .then((res) => {
-      console.log(res);
-      return res;
-    });
+    .then((res) => parsePayload(res));
 
 export { fetchPositions, fetchTargets };
