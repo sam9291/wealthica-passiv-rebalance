@@ -1,23 +1,22 @@
 {
   "files": {
-    "main.css": "/wealthica-passiv-rebalance/build/static/css/main.5f361e03.chunk.css",
-    "main.js": "/wealthica-passiv-rebalance/build/static/js/main.9f359cf0.chunk.js",
-    "main.js.map": "/wealthica-passiv-rebalance/build/static/js/main.9f359cf0.chunk.js.map",
+    "main.css": "/wealthica-passiv-rebalance/build/static/css/main.96b3a414.chunk.css",
+    "main.js": "/wealthica-passiv-rebalance/build/static/js/main.30aa9605.chunk.js",
+    "main.js.map": "/wealthica-passiv-rebalance/build/static/js/main.30aa9605.chunk.js.map",
     "runtime-main.js": "/wealthica-passiv-rebalance/build/static/js/runtime-main.b2626472.js",
     "runtime-main.js.map": "/wealthica-passiv-rebalance/build/static/js/runtime-main.b2626472.js.map",
-    "static/js/2.6453c7ee.chunk.js": "/wealthica-passiv-rebalance/build/static/js/2.6453c7ee.chunk.js",
-    "static/js/2.6453c7ee.chunk.js.map": "/wealthica-passiv-rebalance/build/static/js/2.6453c7ee.chunk.js.map",
+    "static/js/2.f7c1601e.chunk.js": "/wealthica-passiv-rebalance/build/static/js/2.f7c1601e.chunk.js",
+    "static/js/2.f7c1601e.chunk.js.map": "/wealthica-passiv-rebalance/build/static/js/2.f7c1601e.chunk.js.map",
     "index.html": "/wealthica-passiv-rebalance/build/index.html",
-    "precache-manifest.bef3e454cd64a08e5c3be428e7cb6416.js": "/wealthica-passiv-rebalance/build/precache-manifest.bef3e454cd64a08e5c3be428e7cb6416.js",
+    "precache-manifest.ae6b1ee90f7c1495d9191e37e33111ca.js": "/wealthica-passiv-rebalance/build/precache-manifest.ae6b1ee90f7c1495d9191e37e33111ca.js",
     "service-worker.js": "/wealthica-passiv-rebalance/build/service-worker.js",
-    "static/css/main.5f361e03.chunk.css.map": "/wealthica-passiv-rebalance/build/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.6453c7ee.chunk.js.LICENSE.txt": "/wealthica-passiv-rebalance/build/static/js/2.6453c7ee.chunk.js.LICENSE.txt",
-    "static/media/logo.svg": "/wealthica-passiv-rebalance/build/static/media/logo.5d5d9eef.svg"
+    "static/css/main.96b3a414.chunk.css.map": "/wealthica-passiv-rebalance/build/static/css/main.96b3a414.chunk.css.map",
+    "static/js/2.f7c1601e.chunk.js.LICENSE.txt": "/wealthica-passiv-rebalance/build/static/js/2.f7c1601e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b2626472.js",
-    "static/js/2.6453c7ee.chunk.js",
-    "static/css/main.5f361e03.chunk.css",
-    "static/js/main.9f359cf0.chunk.js"
+    "static/js/2.f7c1601e.chunk.js",
+    "static/css/main.96b3a414.chunk.css",
+    "static/js/main.30aa9605.chunk.js"
   ]
 }
