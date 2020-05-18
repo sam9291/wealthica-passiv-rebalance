@@ -49,7 +49,8 @@ const fetchRebalanceActions = (
 ): Promise<RebalanceAction[]> =>
   request("https://getpassiv.com/api/v1/embeddedTrades", undefined, {
     method: "POST",
-    body: requestQuery as any,
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: JSON.stringify(requestQuery),
   });
 
 export {
