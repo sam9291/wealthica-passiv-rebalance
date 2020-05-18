@@ -17,7 +17,6 @@ import {
   PortfolioTarget,
   SymbolTarget,
   RebalanceAction,
-  Balance,
 } from "./environment/passiv-api";
 
 const buttonStyle = { margin: 8 };
@@ -81,16 +80,16 @@ const App = () => {
       )
   );
 
-  const cashBalances = distinctCurrencies.map((currency) =>
-    getBalancePerCurrency(currency)
-  );
-
   const getBalancePerCurrency = (currency: string) => ({
     currency: currency,
     amount: institutions
       .flatMap((x) => x.investments.filter((i) => i.currency === currency))
       .reduce((total, investment) => total + investment.cash, 0),
   });
+
+  const cashBalances = distinctCurrencies.map((currency) =>
+    getBalancePerCurrency(currency)
+  );
 
   useEffect(() => {
     if (!isInitialized) {
