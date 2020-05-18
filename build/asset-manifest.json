@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/wealthica-passiv-rebalance/build/static/css/main.5f361e03.chunk.css",
-    "main.js": "/wealthica-passiv-rebalance/build/static/js/main.894b9551.chunk.js",
-    "main.js.map": "/wealthica-passiv-rebalance/build/static/js/main.894b9551.chunk.js.map",
+    "main.js": "/wealthica-passiv-rebalance/build/static/js/main.9ba9b330.chunk.js",
+    "main.js.map": "/wealthica-passiv-rebalance/build/static/js/main.9ba9b330.chunk.js.map",
     "runtime-main.js": "/wealthica-passiv-rebalance/build/static/js/runtime-main.b2626472.js",
     "runtime-main.js.map": "/wealthica-passiv-rebalance/build/static/js/runtime-main.b2626472.js.map",
-    "static/js/2.60137aa2.chunk.js": "/wealthica-passiv-rebalance/build/static/js/2.60137aa2.chunk.js",
-    "static/js/2.60137aa2.chunk.js.map": "/wealthica-passiv-rebalance/build/static/js/2.60137aa2.chunk.js.map",
+    "static/js/2.aacd6aa2.chunk.js": "/wealthica-passiv-rebalance/build/static/js/2.aacd6aa2.chunk.js",
+    "static/js/2.aacd6aa2.chunk.js.map": "/wealthica-passiv-rebalance/build/static/js/2.aacd6aa2.chunk.js.map",
     "index.html": "/wealthica-passiv-rebalance/build/index.html",
-    "precache-manifest.1eada74622bf63eb2d06d2b9c4521cc2.js": "/wealthica-passiv-rebalance/build/precache-manifest.1eada74622bf63eb2d06d2b9c4521cc2.js",
+    "precache-manifest.d273ba5866efe5309bb531a08d3f650c.js": "/wealthica-passiv-rebalance/build/precache-manifest.d273ba5866efe5309bb531a08d3f650c.js",
     "service-worker.js": "/wealthica-passiv-rebalance/build/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/wealthica-passiv-rebalance/build/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.60137aa2.chunk.js.LICENSE.txt": "/wealthica-passiv-rebalance/build/static/js/2.60137aa2.chunk.js.LICENSE.txt",
+    "static/js/2.aacd6aa2.chunk.js.LICENSE.txt": "/wealthica-passiv-rebalance/build/static/js/2.aacd6aa2.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/wealthica-passiv-rebalance/build/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.b2626472.js",
-    "static/js/2.60137aa2.chunk.js",
+    "static/js/2.aacd6aa2.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.894b9551.chunk.js"
+    "static/js/main.9ba9b330.chunk.js"
   ]
 }
