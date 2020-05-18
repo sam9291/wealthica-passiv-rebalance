@@ -68,7 +68,29 @@ const App = () => {
   const [rebalanceActions, setRebalanceActions] = useState<RebalanceAction[]>(
     []
   );
-  const [cashBalances, setCashBalances] = useState<Balance[]>([]);
+  const distinctCurrencies = Object.keys(
+    institutions
+      .flatMap((x) => x.investments)
+      .map((x) => x.currency)
+      .reduce(
+        (map, currency) => ({
+          ...map,
+          [currency]: 1,
+        }),
+        {}
+      )
+  );
+
+  const cashBalances = distinctCurrencies.map((currency) =>
+    getBalancePerCurrency(currency)
+  );
+
+  const getBalancePerCurrency = (currency: string) => ({
+    currency: currency,
+    amount: institutions
+      .flatMap((x) => x.investments.filter((i) => i.currency === currency))
+      .reduce((total, investment) => total + investment.cash, 0),
+  });
 
   useEffect(() => {
     if (!isInitialized) {
@@ -93,15 +115,6 @@ const App = () => {
   useEffect(() => {
     const refreshPositions = async () => {
       if (options) {
-        const getBalancePerCurrency = (currency: string) => ({
-          currency: currency,
-          amount: institutions
-            .flatMap((x) =>
-              x.investments.filter((i) => i.currency === currency)
-            )
-            .reduce((total, investment) => total + investment.cash, 0),
-        });
-
         const result = await fetchPositions(options);
         setPositions(result);
 
@@ -110,30 +123,11 @@ const App = () => {
 
         const institutionsResults = await fetchInstitutions(options);
         setInstitutions(institutionsResults);
-
-        const distinctCurrencies = Object.keys(
-          institutions
-            .flatMap((x) => x.investments)
-            .map((x) => x.currency)
-            .reduce(
-              (map, currency) => ({
-                ...map,
-                [currency]: 1,
-              }),
-              {}
-            )
-        );
-
-        const cashBalances = distinctCurrencies.map((currency) =>
-          getBalancePerCurrency(currency)
-        );
-
-        setCashBalances(cashBalances);
       }
     };
 
     refreshPositions();
-  }, [institutions, options]);
+  }, [options]);
 
   const select = async (portfolio: PortfolioTarget) => {
     const result = await fetchRebalanceActions({
