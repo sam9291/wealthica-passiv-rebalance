@@ -6,6 +6,13 @@ export type WealthicaAddon = {
     event: string,
     options: (options: WealthicaAddonOptions) => void
   ) => void;
+  api: {
+    getPositions: (query: {
+      groups?: string;
+      institutions?: string;
+      investments?: string;
+    }) => Promise<Position[]>;
+  };
 };
 export type WealthicaAddonOptions = {
   assetsEnabled: boolean;
@@ -15,8 +22,8 @@ export type WealthicaAddonOptions = {
   deletedFilter: boolean;
   fromDate: string;
   groupsFilter: string;
-  institutionsFilter: null;
-  investmentsFilter: null;
+  institutionsFilter: string | undefined;
+  investmentsFilter: string | undefined;
   language: string; //"en"
   liabilitiesEnabled: boolean;
   liabilitiesFilter: boolean;
