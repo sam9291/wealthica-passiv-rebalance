@@ -46,12 +46,14 @@ const fetchTargets = (): Promise<PortfolioTargetRepository> =>
 
 const fetchRebalanceActions = (
   requestQuery: FetchRebalanceActionsQuery
-): Promise<RebalanceAction[]> =>
-  request("https://getpassiv.com/api/v1/embeddedTrades", undefined, {
+): Promise<RebalanceAction[]> => {
+  var data = new FormData();
+  data.append("json", JSON.stringify(requestQuery));
+  return request("https://getpassiv.com/api/v1/embeddedTrades", undefined, {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: JSON.stringify(requestQuery),
+    body: data,
   });
+};
 
 export {
   fetchPositions,
