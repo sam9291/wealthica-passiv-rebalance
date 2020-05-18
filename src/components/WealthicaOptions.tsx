@@ -1,5 +1,5 @@
 import React from "react";
-import { WealthicaAddonOptions } from "../environment/addon";
+import { WealthicaAddonOptions } from "../environment/wealthica-api";
 
 type Props = {
   options: WealthicaAddonOptions;
