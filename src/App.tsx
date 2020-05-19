@@ -140,7 +140,7 @@ const App = () => {
     const result = await fetchRebalanceActions({
       buy_only: generateBuyOnly,
       positions: positions.map((x) => ({
-        symbol: x.security.symbol,
+        symbol: getSymbol(x.security, x.category),
         units: x.quantity,
       })),
       targets: portfolio.components.map((x) => ({
