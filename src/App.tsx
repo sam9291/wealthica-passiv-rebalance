@@ -59,6 +59,11 @@ const Row: React.FC<RowProps> = (props) => {
       <td>{rebalanceAction?.action || ""}</td>
       <td>{actionQuantity || ""}</td>
       <td>{quantity + actionQuantity}</td>
+      <td>
+        {!rebalanceAction
+          ? "-"
+          : (quantity + actionQuantity) * rebalanceAction.price}
+      </td>
     </tr>
   );
 };
@@ -214,7 +219,8 @@ const App = () => {
               <th>Current Quantity</th>
               <th>Action</th>
               <th>Buy/Sell</th>
-              <th>Result</th>
+              <th>Final Quantity</th>
+              <th>Final Value</th>
             </tr>
             {selectedPortfolio.components
               .sort(
