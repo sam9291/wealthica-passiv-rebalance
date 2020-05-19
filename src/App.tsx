@@ -28,8 +28,8 @@ type RowProps = {
   actions: RebalanceAction[];
 };
 
-const getSymbol = (security: Security, category: string) => {
-  const suffix = category === "Canadian Stocks" ? ".TO" : "";
+const getSymbol = (security: Security, currency: string) => {
+  const suffix = currency === "cad" ? ".TO" : "";
 
   return `${security.symbol}${suffix}`;
 };
@@ -37,7 +37,7 @@ const getSymbol = (security: Security, category: string) => {
 const Row: React.FC<RowProps> = (props) => {
   const quantity =
     props.positions.find(
-      (x) => getSymbol(x.security, x.category) === props.component.symbol
+      (x) => getSymbol(x.security, x.currency) === props.component.symbol
     )?.quantity || 0;
   const rebalanceAction = props.actions.find(
     (x) => x.symbol === props.component.symbol
@@ -140,7 +140,7 @@ const App = () => {
     const result = await fetchRebalanceActions({
       buy_only: generateBuyOnly,
       positions: positions.map((x) => ({
-        symbol: getSymbol(x.security, x.category),
+        symbol: getSymbol(x.security, x.currency),
         units: x.quantity,
       })),
       targets: portfolio.components.map((x) => ({
@@ -164,7 +164,7 @@ const App = () => {
         </tr>
         {positions.map((position) => (
           <tr>
-            <td>{getSymbol(position.security, position.category)}</td>
+            <td>{getSymbol(position.security, position.currency)}</td>
             <td>{position.quantity}</td>
           </tr>
         ))}
@@ -216,13 +216,19 @@ const App = () => {
               <th>Buy/Sell</th>
               <th>Result</th>
             </tr>
-            {selectedPortfolio.components.map((c) => (
-              <Row
-                component={c}
-                positions={positions}
-                actions={rebalanceActions}
-              />
-            ))}
+            {selectedPortfolio.components
+              .sort(
+                (x) =>
+                  rebalanceActions.find((a) => a.symbol === x.symbol)?.units ||
+                  0
+              )
+              .map((c) => (
+                <Row
+                  component={c}
+                  positions={positions}
+                  actions={rebalanceActions}
+                />
+              ))}
           </table>
         </>
       )}
