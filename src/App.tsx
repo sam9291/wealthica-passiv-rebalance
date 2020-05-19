@@ -51,6 +51,7 @@ const Row: React.FC<RowProps> = (props) => {
       <td>{rebalanceAction?.price || "-"}</td>
       <td>{props.component.percentOfPortfolio}</td>
       <td>{quantity}</td>
+      <td>{rebalanceAction?.action || ""}</td>
       <td>{actionQuantity || ""}</td>
       <td>{quantity + actionQuantity}</td>
     </tr>
@@ -209,6 +210,7 @@ const App = () => {
               <th>Price</th>
               <th>Target</th>
               <th>Current Quantity</th>
+              <th>Action</th>
               <th>Buy/Sell</th>
               <th>Result</th>
             </tr>
