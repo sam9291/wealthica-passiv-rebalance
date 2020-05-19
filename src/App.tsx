@@ -25,6 +25,7 @@ const buttonStyle = { margin: 8 };
 const resultStyle: Partial<React.CSSProperties> = {
   display: "flex",
   flexDirection: "row",
+  justifyContent: "space-around",
 };
 
 type RowProps = {
