@@ -42,7 +42,7 @@ const Row: React.FC<RowProps> = (props) => {
   if (rebalanceAction) {
     actionQuantity = rebalanceAction.units;
     if (rebalanceAction.action === "SELL") {
-      actionQuantity *= -1;
+      actionQuantity = actionQuantity * -1;
     }
   }
   return (
