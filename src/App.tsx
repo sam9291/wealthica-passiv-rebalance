@@ -78,9 +78,8 @@ const Row: React.FC<RowProps> = (props) => {
     <tr>
       <td>{props.component.symbol}</td>
       <td>{rebalanceAction?.price || "-"}</td>
-      <td>{`${Math.round((currentValue / totalValue) * 100 * 100) / 100}% / ${
-        props.component.percentOfPortfolio * 100
-      }%`}</td>
+      <td>{`${Math.round((currentValue / totalValue) * 100 * 100) / 100}%`}</td>
+      <td>{`${props.component.percentOfPortfolio * 100}%`}</td>
       <td>{quantity}</td>
       <td>{currentValue}</td>
       <td>{rebalanceAction?.action || ""}</td>
@@ -238,6 +237,7 @@ const App = () => {
             <tr>
               <th>Symbol</th>
               <th>Price</th>
+              <th>Actual</th>
               <th>Target</th>
               <th>Current Quantity</th>
               <th>Current Value</th>
