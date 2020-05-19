@@ -5,6 +5,7 @@ import {
   wealthica,
   WealthicaAddonOptions,
   Institution,
+  Security,
 } from "./environment/wealthica-api";
 import {
   fetchPositions,
@@ -27,12 +28,16 @@ type RowProps = {
   actions: RebalanceAction[];
 };
 
+const getSymbol = (security: Security, category: string) => {
+  const suffix = category === "Canadian Stocks" ? ".TO" : "";
+
+  return `${security.symbol}${suffix}`;
+};
+
 const Row: React.FC<RowProps> = (props) => {
   const quantity =
-    props.positions.find((x) =>
-      [`${x.security.symbol}.TO`, x.security.symbol].includes(
-        props.component.symbol
-      )
+    props.positions.find(
+      (x) => getSymbol(x.security, x.category) === props.component.symbol
     )?.quantity || 0;
   const rebalanceAction = props.actions.find(
     (x) => x.symbol === props.component.symbol
@@ -102,16 +107,13 @@ const App = () => {
 
       wealthica.addon.on("init", (options) => {
         setOptions(options);
-        console.log("init", options);
       });
 
       wealthica.addon.on("update", (options) => {
-        // Filters have been updated and Dashboard is passing in updated options
         setOptions((prev) => ({
           ...prev,
           ...options,
         }));
-        console.log("update", options);
       });
     }
   }, [isInitialized]);
@@ -162,7 +164,7 @@ const App = () => {
         </tr>
         {positions.map((position) => (
           <tr>
-            <td>{position.security.symbol}</td>
+            <td>{getSymbol(position.security, position.category)}</td>
             <td>{position.quantity}</td>
           </tr>
         ))}

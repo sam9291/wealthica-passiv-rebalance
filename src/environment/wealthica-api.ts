@@ -56,25 +56,27 @@ export type Investment = {
   gain_amount: number;
 };
 
+export type Security = {
+  _id: string;
+  currency: string;
+  symbol: string;
+  type: string;
+  name: string;
+  last_price: number;
+  high_date: string;
+  high_price: number;
+  low_date: string;
+  low_price: number;
+  last_date: string;
+  aliases: string[];
+  id: string;
+};
+
 export type Position = {
   category: string;
   class: string;
   _id: string;
-  security: {
-    _id: string;
-    currency: string;
-    symbol: string;
-    type: string;
-    name: string;
-    last_price: number;
-    high_date: string;
-    high_price: number;
-    low_date: string;
-    low_price: number;
-    last_date: string;
-    aliases: string[];
-    id: string;
-  };
+  security: Security;
   investments: Investment[];
   value: number;
   book_value: number;
