@@ -270,7 +270,7 @@ const App = () => {
         </div>
 
         <div>
-          <h1>Targets:</h1>
+          <h1>Select a Passiv portfolio to calculate:</h1>
           <div>
             {targetRepository && (
               <>
