@@ -117,16 +117,24 @@ const App = () => {
       )
   );
 
-  const getBalancePerCurrency = (currency: string) => ({
+  const getBalancePerCurrency = (
+    currency: string,
+    options: WealthicaAddonOptions
+  ) => ({
     currency: currency,
     amount: institutions
       .flatMap((x) => x.investments.filter((i) => i.currency === currency))
+      .filter(
+        (x) => !options.groupsFilter || x.groups.includes(options.groupsFilter)
+      )
       .reduce((total, investment) => total + investment.cash, 0),
   });
 
-  const cashBalances = distinctCurrencies.map((currency) =>
-    getBalancePerCurrency(currency)
-  );
+  const cashBalances = !options
+    ? []
+    : distinctCurrencies.map((currency) =>
+        getBalancePerCurrency(currency, options)
+      );
 
   useEffect(() => {
     if (!isInitialized) {
