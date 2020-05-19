@@ -44,28 +44,34 @@ const Row: React.FC<RowProps> = (props) => {
   );
 
   let actionQuantity = 0;
+  let targetValue = 0;
+  let currentValue = 0;
   if (rebalanceAction) {
     actionQuantity = rebalanceAction.units;
     if (rebalanceAction.action === "SELL") {
       actionQuantity = actionQuantity * -1;
     }
+
+    currentValue = Math.round(quantity * rebalanceAction.price * 100) / 100;
+
+    targetValue =
+      Math.round((quantity + actionQuantity) * rebalanceAction.price * 100) /
+      100;
   }
+
   return (
     <tr>
       <td>{props.component.symbol}</td>
       <td>{rebalanceAction?.price || "-"}</td>
-      <td>{props.component.percentOfPortfolio}</td>
+      <td>{`${currentValue / targetValue}/${
+        props.component.percentOfPortfolio
+      }`}</td>
       <td>{quantity}</td>
+      <td>{currentValue}</td>
       <td>{rebalanceAction?.action || ""}</td>
       <td>{actionQuantity || ""}</td>
       <td>{quantity + actionQuantity}</td>
-      <td>
-        {!rebalanceAction
-          ? "-"
-          : Math.round(
-              (quantity + actionQuantity) * rebalanceAction.price * 100
-            ) / 100}
-      </td>
+      <td>{!rebalanceAction ? "-" : targetValue}</td>
     </tr>
   );
 };
@@ -219,6 +225,7 @@ const App = () => {
               <th>Price</th>
               <th>Target</th>
               <th>Current Quantity</th>
+              <th>Current Value</th>
               <th>Action</th>
               <th>Buy/Sell</th>
               <th>Final Quantity</th>
