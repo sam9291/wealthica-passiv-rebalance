@@ -220,7 +220,11 @@ const App = () => {
               onClick={() => setGenerateBuyOnly(!generateBuyOnly)}
             />
             {targetRepository.portfolios.map((p) => (
-              <button onClick={() => select(p)} style={buttonStyle}>
+              <button
+                disabled={isFetchingData}
+                onClick={() => select(p)}
+                style={buttonStyle}
+              >
                 {p.portfolioName}
               </button>
             ))}
