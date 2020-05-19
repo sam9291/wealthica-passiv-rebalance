@@ -65,8 +65,11 @@ const Row: React.FC<RowProps> = (props) => {
       (total, current) =>
         total +
         current.quantity *
-          (props.actions.find((x) => x.symbol === props.component.symbol)
-            ?.price || 0),
+          (props.actions.find(
+            (x) =>
+              x.symbol ===
+              getSymbol(current.security, current.security.currency)
+          )?.price || 0),
       0
     );
   }
