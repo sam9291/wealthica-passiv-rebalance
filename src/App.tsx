@@ -71,14 +71,17 @@ const calculateDelta = (
   const quantity = getQuantity(positions, component);
   const rebalanceAction = actions.find((x) => x.symbol === component.symbol);
   return (
-    component.percentOfPortfolio * 100 -
     Math.round(
-      (getCurrentValue(quantity, rebalanceAction?.price || 0) /
-        getTotalFromPositions(positions, actions)) *
-        100 *
+      (component.percentOfPortfolio * 100 -
+        Math.round(
+          (getCurrentValue(quantity, rebalanceAction?.price || 0) /
+            getTotalFromPositions(positions, actions)) *
+            100 *
+            100
+        ) /
+          100) *
         100
-    ) /
-      100
+    ) / 100
   );
 };
 
@@ -120,7 +123,11 @@ const Row: React.FC<RowProps> = (props) => {
       <td>{actionQuantity || ""}</td>
       <td>{quantity + actionQuantity}</td>
       <td>{!rebalanceAction ? "-" : targetValue}</td>
-      <td>{calculateDelta(props.component, props.positions, props.actions)}</td>
+      <td>{`${calculateDelta(
+        props.component,
+        props.positions,
+        props.actions
+      )}%`}</td>
     </tr>
   );
 };
