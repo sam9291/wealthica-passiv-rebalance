@@ -40,12 +40,50 @@ const getSymbol = (security: Security, currency: string) => {
   return `${security.symbol}${suffix}`;
 };
 
+const getTotalFromPositions = (
+  positions: Position[],
+  actions: RebalanceAction[]
+) =>
+  positions.reduce(
+    (total, current) =>
+      total +
+      current.quantity *
+        (actions.find(
+          (x) =>
+            x.symbol === getSymbol(current.security, current.security.currency)
+        )?.price || 0),
+    0
+  );
+
+const getQuantity = (positions: Position[], component: SymbolTarget) =>
+  positions.find(
+    (x) => getSymbol(x.security, x.security.currency) === component.symbol
+  )?.quantity || 0;
+
+const getCurrentValue = (quantity: number, price: number) =>
+  Math.round(quantity * price * 100) / 100;
+
+const calculateDelta = (
+  component: SymbolTarget,
+  positions: Position[],
+  actions: RebalanceAction[]
+) => {
+  const quantity = getQuantity(positions, component);
+  const rebalanceAction = actions.find((x) => x.symbol === component.symbol);
+  return (
+    component.percentOfPortfolio * 100 -
+    Math.round(
+      (getCurrentValue(quantity, rebalanceAction?.price || 0) /
+        getTotalFromPositions(positions, actions)) *
+        100 *
+        100
+    ) /
+      100
+  );
+};
+
 const Row: React.FC<RowProps> = (props) => {
-  const quantity =
-    props.positions.find(
-      (x) =>
-        getSymbol(x.security, x.security.currency) === props.component.symbol
-    )?.quantity || 0;
+  const quantity = getQuantity(props.positions, props.component);
   const rebalanceAction = props.actions.find(
     (x) => x.symbol === props.component.symbol
   );
@@ -67,17 +105,7 @@ const Row: React.FC<RowProps> = (props) => {
       Math.round((quantity + actionQuantity) * rebalanceAction.price * 100) /
       100;
 
-    totalValue = props.positions.reduce(
-      (total, current) =>
-        total +
-        current.quantity *
-          (props.actions.find(
-            (x) =>
-              x.symbol ===
-              getSymbol(current.security, current.security.currency)
-          )?.price || 0),
-      0
-    );
+    totalValue = getTotalFromPositions(props.positions, props.actions);
   }
 
   return (
@@ -92,6 +120,7 @@ const Row: React.FC<RowProps> = (props) => {
       <td>{actionQuantity || ""}</td>
       <td>{quantity + actionQuantity}</td>
       <td>{!rebalanceAction ? "-" : targetValue}</td>
+      <td>{calculateDelta(props.component, props.positions, props.actions)}</td>
     </tr>
   );
 };
@@ -274,12 +303,13 @@ const App = () => {
                   <th>Buy/Sell</th>
                   <th>Final Quantity</th>
                   <th>Final Value</th>
+                  <th>Delta</th>
                 </tr>
                 {selectedPortfolio.components
                   .sort(
-                    (x) =>
-                      rebalanceActions.find((a) => a.symbol === x.symbol)
-                        ?.units || 0
+                    (a, b) =>
+                      calculateDelta(a, positions, rebalanceActions) -
+                      calculateDelta(b, positions, rebalanceActions)
                   )
                   .map((c) => (
                     <Row
