@@ -22,6 +22,11 @@ import {
 
 const buttonStyle = { margin: 8 };
 
+const resultStyle: Partial<React.CSSProperties> = {
+  display: "flex",
+  flexDirection: "row",
+};
+
 type RowProps = {
   component: SymbolTarget;
   positions: Position[];
@@ -195,19 +200,6 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>Positions:</h1>
-      <table>
-        <tr>
-          <th>Symbol</th>
-          <th>Quantity</th>
-        </tr>
-        {positions.map((position) => (
-          <tr>
-            <td>{getSymbol(position.security, position.security.currency)}</td>
-            <td>{position.quantity}</td>
-          </tr>
-        ))}
-      </table>
       <h1>Cash Balance</h1>
       <table>
         <tr>
@@ -221,63 +213,85 @@ const App = () => {
           </tr>
         ))}
       </table>
-      <h1>Targets:</h1>
-      <div>
-        {targetRepository && (
-          <>
-            <span>Buy only</span>
-            <input
-              type="checkbox"
-              checked={generateBuyOnly}
-              onClick={() => setGenerateBuyOnly(!generateBuyOnly)}
-            />
-            {targetRepository.portfolios.map((p) => (
-              <button
-                disabled={isFetchingData}
-                onClick={() => select(p)}
-                style={buttonStyle}
-              >
-                {p.portfolioName}
-              </button>
-            ))}
-          </>
-        )}
-      </div>
-
-      {isFetchingData && <h2>Loading...</h2>}
-
-      {selectedPortfolio && positions && (
-        <>
-          <h1>{selectedPortfolio.portfolioName}</h1>
+      <div style={resultStyle}>
+        <div>
+          <h1>Positions:</h1>
           <table>
             <tr>
               <th>Symbol</th>
-              <th>Price</th>
-              <th>Actual</th>
-              <th>Target</th>
-              <th>Current Quantity</th>
-              <th>Current Value</th>
-              <th>Action</th>
-              <th>Buy/Sell</th>
-              <th>Final Quantity</th>
-              <th>Final Value</th>
+              <th>Quantity</th>
             </tr>
-            {selectedPortfolio.components
-              .sort(
-                (x) =>
-                  rebalanceActions.find((a) => a.symbol === x.symbol)?.units ||
-                  0
-              )
-              .map((c) => (
-                <Row
-                  component={c}
-                  positions={positions}
-                  actions={rebalanceActions}
-                />
-              ))}
+            {positions.map((position) => (
+              <tr>
+                <td>
+                  {getSymbol(position.security, position.security.currency)}
+                </td>
+                <td>{position.quantity}</td>
+              </tr>
+            ))}
           </table>
-        </>
-      )}
+        </div>
+
+        <div>
+          <h1>Targets:</h1>
+          <div>
+            {targetRepository && (
+              <>
+                <span>Buy only</span>
+                <input
+                  type="checkbox"
+                  checked={generateBuyOnly}
+                  onClick={() => setGenerateBuyOnly(!generateBuyOnly)}
+                />
+                {targetRepository.portfolios.map((p) => (
+                  <button
+                    disabled={isFetchingData}
+                    onClick={() => select(p)}
+                    style={buttonStyle}
+                  >
+                    {p.portfolioName}
+                  </button>
+                ))}
+              </>
+            )}
+          </div>
+
+          {isFetchingData && <h2>Loading...</h2>}
+
+          {selectedPortfolio && positions && (
+            <>
+              <h1>{selectedPortfolio.portfolioName}</h1>
+              <table>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Price</th>
+                  <th>Actual</th>
+                  <th>Target</th>
+                  <th>Current Quantity</th>
+                  <th>Current Value</th>
+                  <th>Action</th>
+                  <th>Buy/Sell</th>
+                  <th>Final Quantity</th>
+                  <th>Final Value</th>
+                </tr>
+                {selectedPortfolio.components
+                  .sort(
+                    (x) =>
+                      rebalanceActions.find((a) => a.symbol === x.symbol)
+                        ?.units || 0
+                  )
+                  .map((c) => (
+                    <Row
+                      component={c}
+                      positions={positions}
+                      actions={rebalanceActions}
+                    />
+                  ))}
+              </table>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
