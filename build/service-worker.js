@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/wealthica-passiv-rebalance/build/precache-manifest.a2e3716f64f9b1576dbc067128d093c8.js"
+  "/wealthica-passiv-rebalance/build/precache-manifest.e4e99fb64d7435c06c8035d3f6b53acd.js"
 );
 
 self.addEventListener('message', (event) => {

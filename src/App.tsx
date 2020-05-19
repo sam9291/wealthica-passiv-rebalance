@@ -37,7 +37,8 @@ const getSymbol = (security: Security, currency: string) => {
 const Row: React.FC<RowProps> = (props) => {
   const quantity =
     props.positions.find(
-      (x) => getSymbol(x.security, x.currency) === props.component.symbol
+      (x) =>
+        getSymbol(x.security, x.security.currency) === props.component.symbol
     )?.quantity || 0;
   const rebalanceAction = props.actions.find(
     (x) => x.symbol === props.component.symbol
@@ -157,7 +158,7 @@ const App = () => {
     const result = await fetchRebalanceActions({
       buy_only: generateBuyOnly,
       positions: positions.map((x) => ({
-        symbol: getSymbol(x.security, x.currency),
+        symbol: getSymbol(x.security, x.security.currency),
         units: x.quantity,
       })),
       targets: portfolio.components.map((x) => ({
@@ -181,7 +182,7 @@ const App = () => {
         </tr>
         {positions.map((position) => (
           <tr>
-            <td>{getSymbol(position.security, position.currency)}</td>
+            <td>{getSymbol(position.security, position.security.currency)}</td>
             <td>{position.quantity}</td>
           </tr>
         ))}
