@@ -125,7 +125,11 @@ const App = () => {
     amount: institutions
       .flatMap((x) => x.investments.filter((i) => i.currency === currency))
       .filter(
-        (x) => !options.groupsFilter || x.groups.includes(options.groupsFilter)
+        (x) =>
+          !options.groupsFilter ||
+          options.groupsFilter
+            .split(",")
+            .some((group) => x.groups.includes(group))
       )
       .reduce((total, investment) => total + investment.cash, 0),
   });
