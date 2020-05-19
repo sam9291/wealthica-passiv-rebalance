@@ -47,10 +47,8 @@ const Row: React.FC<RowProps> = (props) => {
   let actionQuantity = 0;
   let targetValue = 0;
   let currentValue = 0;
-  const totalValue = props.positions.reduce(
-    (total, current) => total + current.value,
-    0
-  );
+  let totalValue = 0;
+
   if (rebalanceAction) {
     actionQuantity = rebalanceAction.units;
     if (rebalanceAction.action === "SELL") {
@@ -62,6 +60,15 @@ const Row: React.FC<RowProps> = (props) => {
     targetValue =
       Math.round((quantity + actionQuantity) * rebalanceAction.price * 100) /
       100;
+
+    totalValue = props.positions.reduce(
+      (total, current) =>
+        total +
+        current.quantity *
+          (props.actions.find((x) => x.symbol === props.component.symbol)
+            ?.price || 0),
+      0
+    );
   }
 
   return (
