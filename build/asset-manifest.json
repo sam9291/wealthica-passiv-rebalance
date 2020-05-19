@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/wealthica-passiv-rebalance/build/static/css/main.96b3a414.chunk.css",
-    "main.js": "/wealthica-passiv-rebalance/build/static/js/main.3685008a.chunk.js",
-    "main.js.map": "/wealthica-passiv-rebalance/build/static/js/main.3685008a.chunk.js.map",
+    "main.css": "/wealthica-passiv-rebalance/build/static/css/main.645856b7.chunk.css",
+    "main.js": "/wealthica-passiv-rebalance/build/static/js/main.95a388a6.chunk.js",
+    "main.js.map": "/wealthica-passiv-rebalance/build/static/js/main.95a388a6.chunk.js.map",
     "runtime-main.js": "/wealthica-passiv-rebalance/build/static/js/runtime-main.b2626472.js",
     "runtime-main.js.map": "/wealthica-passiv-rebalance/build/static/js/runtime-main.b2626472.js.map",
     "static/js/2.f3659ce9.chunk.js": "/wealthica-passiv-rebalance/build/static/js/2.f3659ce9.chunk.js",
     "static/js/2.f3659ce9.chunk.js.map": "/wealthica-passiv-rebalance/build/static/js/2.f3659ce9.chunk.js.map",
     "index.html": "/wealthica-passiv-rebalance/build/index.html",
-    "precache-manifest.a6250c23b1ac6f41b04e65ccff5d7544.js": "/wealthica-passiv-rebalance/build/precache-manifest.a6250c23b1ac6f41b04e65ccff5d7544.js",
+    "precache-manifest.01fcddb0f055440925fbc5f198432c37.js": "/wealthica-passiv-rebalance/build/precache-manifest.01fcddb0f055440925fbc5f198432c37.js",
     "service-worker.js": "/wealthica-passiv-rebalance/build/service-worker.js",
-    "static/css/main.96b3a414.chunk.css.map": "/wealthica-passiv-rebalance/build/static/css/main.96b3a414.chunk.css.map",
+    "static/css/main.645856b7.chunk.css.map": "/wealthica-passiv-rebalance/build/static/css/main.645856b7.chunk.css.map",
     "static/js/2.f3659ce9.chunk.js.LICENSE.txt": "/wealthica-passiv-rebalance/build/static/js/2.f3659ce9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b2626472.js",
     "static/js/2.f3659ce9.chunk.js",
-    "static/css/main.96b3a414.chunk.css",
-    "static/js/main.3685008a.chunk.js"
+    "static/css/main.645856b7.chunk.css",
+    "static/js/main.95a388a6.chunk.js"
   ]
 }

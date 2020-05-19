@@ -62,7 +62,9 @@ const Row: React.FC<RowProps> = (props) => {
       <td>
         {!rebalanceAction
           ? "-"
-          : (quantity + actionQuantity) * rebalanceAction.price}
+          : Math.round(
+              (quantity + actionQuantity) * rebalanceAction.price * 100
+            ) / 100}
       </td>
     </tr>
   );
